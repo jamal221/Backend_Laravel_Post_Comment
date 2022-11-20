@@ -9,6 +9,7 @@ class login_user extends Model
 {
     use HasFactory;
     protected $table='login_users';
+    public $timestamps=true;
     protected $fillable=[
         'username',
         'password'

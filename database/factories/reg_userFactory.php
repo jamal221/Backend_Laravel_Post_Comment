@@ -15,6 +15,7 @@ class reg_userFactory extends Factory
      * Define the model's default state.
      *
      * @return array<string, mixed>
+     * @throws \Exception
      */
     public function definition()
     {
@@ -30,6 +31,7 @@ class reg_userFactory extends Factory
             'state'=>fake()->country(),
             'zipcode'=>fake()->postcode(),
             'remember_token' => Str::random(10),
+            'moderate_user'=>random_int(0,1),
             //
         ];
     }

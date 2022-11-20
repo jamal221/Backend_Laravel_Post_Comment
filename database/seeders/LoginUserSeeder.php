@@ -6,6 +6,7 @@ use App\Models\login_user;
 use App\Models\reg_user;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 use function Spatie\Ignition\Config\toArray;
 use function Symfony\Component\Console\Style\table;
 use function Symfony\Component\String\trimEnd;
@@ -28,7 +29,9 @@ class LoginUserSeeder extends Seeder
 //        $user_id_reg=reg_user::pluck('id')->toArray();
 //        $sur_user=reg_user::pluck('surname')->toArray();
 //        $name_user=reg_user::pluck('name')->toArray();
+        Schema::disableForeignKeyConstraints();
         login_user::truncate();
+        Schema::enableForeignKeyConstraints();
         $count_user=DB::table('reg_users')
         ->select('*')
         ->get()
@@ -47,7 +50,10 @@ class LoginUserSeeder extends Seeder
                 [
                     'user_id'=>$i,
                     'username'=>strtolower($sel_uer[0]["surname"].str_split($sel_uer[0]["name"],3)[0]),
-                    'password'=>fake()->password(6,12)]
+                    'password'=>(random_int(123456,456789)),
+                    'created_at'=>now(),
+                    'updated_at'=>now()
+                ]
 
             );// end insert
             $i+=1;

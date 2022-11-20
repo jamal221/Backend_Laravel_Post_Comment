@@ -1,12 +1,12 @@
 @extends('backend_project.Layouts.main')
 @section('content')
     @php
-        if(!\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web') and ! \Illuminate\Support\Facades\Cache::store('database')->has('result_login'))
-        {
-                echo '<script type="text/javascript">
-                location.replace("/login");
-                </script>';
-        }
+        if(!\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_0') and !\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1')  )
+            {
+                    echo '<script type="text/javascript">
+                    location.replace("/login");
+                    </script>';
+            }
     @endphp
 {{--{{dd($post_all["body"])}}--}}
 <h1> User ID that can Delete comments has ID <mark>{{$user_can_del_id}}</mark></h1>

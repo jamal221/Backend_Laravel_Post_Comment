@@ -11,9 +11,13 @@
         </script>';
     }
 @endif
-@foreach(\Illuminate\Support\Facades\Cache::store('database')->get('result_login') as $items)
-    <h1>The User who loged has this ID <mark> {{$items->user_id}}</mark> </h1>;
-@endforeach
+@if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1'))
+    @foreach(\Illuminate\Support\Facades\Cache::store('database')->get('result_login') as $items)
+        <h1>The User who loged has this ID <mark> {{$items->user_id}}</mark> </h1>;
+        <button type="button"   class="btn btn-info btn-xs Add_post" id="{{$items->user_id}}" >Do you like to Add new Post</button>
+    @endforeach
+@endif
+
 @foreach($post_all as $items)
 {{--    {{$post_all->count()}}--}}
 {{--{{dd($post_all["title"])}}--}}
@@ -42,6 +46,33 @@
     {{--                {{ $data->fragment(['sort' => 'department'])->links() }}--}}
 </div>
 <script>
+    $(document).on('click', '.Add_post', function(){
+        var id = $(this).attr("id");
+        if(!confirm("Are you sure you want to Add new Post?"))
+        {
+            return false;
+        }
+        var token=$("meta[name='csrf-token']").attr("content");
+        console.log({
+            'id_user':id,
+            '_token':token
+        });
+        $.ajax({
+            url:'Add_post',
+            method:"POST",
+            data:{id_user:id,
+                _token:token
+            },
+            success: function(data){ // What to do if we succeed
+                $('#message').html(data);
+                // location.reload();
+            },
+            error: function(data){
+                alert('Error'+data);
+                //console.log(data);
+            }
+        });
+    });
     // $(document).on('click', '.post_comment_view', function(){
     //     // var btn_id=document.getElementsByName("post_comment_view").value;
     //     // var _token=$("meta[name='csrf-token']").attr("content");

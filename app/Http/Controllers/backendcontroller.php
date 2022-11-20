@@ -68,8 +68,11 @@ class backendcontroller extends Controller
 //                dd($ID_user);
                 Artisan::call('cache:clear');
                 $fetched_user_json=json_decode($fetched_user, true);
-                Cache::store('database')->add('user_valid_web',$received_username,now()->addMinutes(20));
                 Cache::store('database')->add('result_login', $fetched_user, now()->addMinutes(20));
+                if(($fetched_user->toArray()[0]->moderate_user)==0)
+                    Cache::store('database')->add('user_valid_web_level_0',$received_username,now()->addMinutes(20));
+                else
+                    Cache::store('database')->add('user_valid_web_level_1', $fetched_user, now()->addMinutes(20));
 //                Cache::store('database')->add('user_logged_id', $ID_user, now()->addMinutes(20));
                 Cache::lock('user_valid_web', 'result_login');
                 echo 123;
@@ -259,6 +262,47 @@ class backendcontroller extends Controller
 //                Log::error($e);
 ////                throw $e;
 //            }
+
+        }
+    }
+    function Add_post(Request $request)// Add new post
+    {
+
+//        if($request->ajax())
+        if(1==1)
+        {
+//            dd($request->id());
+            try{
+
+//                DB::beginTransaction();
+//                $user_ids=login_user::pluck('id')->toArray();
+//                dd(Cache::store('database')->get('result_login')->toArray()[0]->user_id);
+            $post2=new post();
+            $post2->UserID_Set_Post=$request->id_user;
+            $post2->title=fake()->jobTitle();
+            $post2->body=str_repeat(fake()->realText(200),'2');
+
+                $post2->save();
+//            if($post2->save())
+//            {
+//                echo '<div class="alert alert-success">Post successfuly has been saved</div>';
+////                    DB:: commit();
+//            }
+//            else
+//            {
+//                echo '<div class="alert alert-danger">Error accured </div>';
+////                    DB::rollBack();
+//            }
+
+
+            }
+            catch (\Exception $e)
+            {
+//                DB::rollBack();
+//                echo '<div class="alert alert-danger">Try catch error occured </div>';
+                Log::error($e);
+//                throw $e;
+            }
 
         }
     }

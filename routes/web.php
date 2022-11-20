@@ -29,6 +29,17 @@ Route::get('/viewcomments',[\App\Http\Controllers\backendcontroller::class,'view
 Route::post('/delete_comment', [\App\Http\Controllers\backendcontroller::class,'del_comment'] );
 Route::post('/restore_comment', [\App\Http\Controllers\backendcontroller::class,'restore_comment'] );
 Route::post('/Add_comment', [\App\Http\Controllers\backendcontroller::class,'Add_comment'] );
+Route::get('/loglogout',function(){
+    if (\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_0'))
+    {
+        \Illuminate\Support\Facades\Cache::store('database')->pull('user_valid_web_level_0');
+    }elseif(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1'))
+    {
+        \Illuminate\Support\Facades\Cache::store('database')->pull('user_valid_web_level_0');
+    }
+    return redirect('login');
+}
+);
 //Route::get('/token', function () {
 //    return csrf_token();
 //});

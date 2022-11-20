@@ -24,6 +24,12 @@
     </style>
 </head>
 <body class="antialiased">
+<div >
+    <ol class="breadcrumb float-sm-left">
+        <li class="breadcrumb-item icon-close" style="color:#7b0861; font-size: xx-large " ><a href="loglogout">LogOut</a></li>
+
+    </ol>
+</div>
 <div>
     @yield('content')
 </div>

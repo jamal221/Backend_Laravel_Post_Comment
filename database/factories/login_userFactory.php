@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\reg_user;
+use Faker\Core\Number;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use function Spatie\Ignition\Config\toArray;
 
@@ -25,7 +26,9 @@ class login_userFactory extends Factory
             //
             'user_id'=>$user_id_reg,
             'username'=>$sur_user,
-            'password'=>fake()->password(6,12)
+            'password'=>Number::random(6),
+            'created_at'=>now(),
+            'updated_at'=>now()
         ];
     }
 }
