@@ -126,7 +126,8 @@ class backendcontroller extends Controller
 //                    ->where('deleted_at','=', null)
 //                    ->paginate(25);
             $post_id=$request->post_id;
-            $comments_all=comment::withTrashed()
+            comment::Comments_More_Than_3_hours_will_trash($post_id);
+            $comments_all=comment::withoutTrashed()
                         ->where('post_id', '=', $post_id)
                         ->orderByDesc('created_at')
                         ->paginate('25');

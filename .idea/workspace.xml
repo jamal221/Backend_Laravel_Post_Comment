@@ -4,17 +4,9 @@
     <list default="true" id="995bf09a-89b3-42de-a15f-ff13f069d1ee" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backendcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backendcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/login_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/login_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/login_userFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/login_userFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/reg_userFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/reg_userFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/LoginUserSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/LoginUserSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/Layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/Layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/logged.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/logged.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/viewcomments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/viewcomments.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/viewposts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/viewposts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_11_05_121727_create_reg_users_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_11_19_174328_create_add_moderate_field_to__reg_user_table_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_11_19_174328_create_add_moderate_field_to__reg_user_table_table.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -203,7 +195,7 @@
       <workItem from="1666639637850" duration="2843000" />
       <workItem from="1666645224132" duration="23955000" />
       <workItem from="1667060107435" duration="121564000" />
-      <workItem from="1668437486637" duration="70347000" />
+      <workItem from="1668437486637" duration="81077000" />
     </task>
     <servers />
   </component>

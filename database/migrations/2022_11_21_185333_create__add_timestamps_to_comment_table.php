@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('reg_users', function (Blueprint $table) {
-            $table->tinyInteger('moderate_user')->default(0);
+        Schema::table('comments', function (Blueprint $table) {
+            $table->string('comment_timestamps')->default(time());
         });
-//        Schema::table('reg_users', function (Blueprint $table) {
-//            $table->drop('moderate_user');
-//        });
+
     }
 
     /**
@@ -28,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('add_moderate_field_to__reg_user_table');
+        Schema::table('comments', function (Blueprint $table){
+            $table->dropColumn('comment_timestamps');
+        });
     }
 };

@@ -18,6 +18,19 @@ class comment extends Model
         'body'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('Comments_ID_More_than_100',function ($query){
+            $query->where('user_id_comment','>',100);
+        });
+    }
+    public function scopeComments_More_Than_3_hours_will_trash($query, $post_id_comment){
+        $query->where('comment_timestamps','<',time()-3*60*60)
+                ->where('post_id','=',$post_id_comment)->delete();
+
+    }
     public function show_comment()
     {
 //        return $this->hasOne(post::class);
