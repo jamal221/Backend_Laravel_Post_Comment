@@ -1,17 +1,14 @@
 @extends('backend_project.Layouts.main')
 @section('content')
 {{--{{dd($post_all["body"])}}--}}
-
-@if(\Illuminate\Support\Facades\Cache::store('database')->has('result_login'))
-
-@else
-        {
+@if(!\Illuminate\Support\Facades\Cache::store('database')->has('result_login'))
+     {
         echo '<script type="text/javascript">
             location.replace("/login");
         </script>';
     }
 @endif
-@if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1'))
+@if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1') or \Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2') )
     @foreach(\Illuminate\Support\Facades\Cache::store('database')->get('result_login') as $items)
         <h1>The User who loged has this ID <mark> {{$items->user_id}}</mark> </h1>;
         <button type="button"   class="btn btn-info btn-xs Add_post" id="{{$items->user_id}}" >Do you like to Add new Post</button>
@@ -29,6 +26,17 @@
     <div>
         <h2>Body Post</h2>
         {{$items->body}}
+        <br>
+        <br>
+{{--        {{dd((\App\Models\post::CheckPostIsTrashed($post_trashed_ids,$post_trashed_Count, $items->id)))}}--}}
+{{--        {{dd($items->id)}}--}}
+{{--        {{dd($post_trashed_ids[0]->id)}}--}}
+
+        @if( \Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2') and (\App\Models\post::CheckPostIsTrashed($post_trashed_ids,$post_trashed_Count, $items->id)) )
+                <button type="button"   class="btn btn-info btn-xs Restore_post"  style="color: #7b0861; background-color: #198754; font-size: 20px" id="{{$items->id}}" >Do you like to Restore this Post</button>
+            @elseif(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2'))
+            <button type="button"   class="btn btn-info btn-xs Delete_post"  style="color: #7b0861; background-color: #1a1e21; font-size: 20px" id="{{$items->id}}" >Do you like to Delete this Post</button>
+        @endif
     </div>
     <div>
         <h3>Comment Here</h3>
@@ -61,6 +69,60 @@
             url:'Add_post',
             method:"POST",
             data:{id_user:id,
+                _token:token
+            },
+            success: function(data){ // What to do if we succeed
+                $('#message').html(data);
+                // location.reload();
+            },
+            error: function(data){
+                alert('Error'+data);
+                //console.log(data);
+            }
+        });
+    });
+    $(document).on('click', '.Delete_post', function(){
+        var id = $(this).attr("id");
+        if(!confirm("Are you sure you want to Delete this Post?"))
+        {
+            return false;
+        }
+        var token=$("meta[name='csrf-token']").attr("content");
+        console.log({
+            'id_post':id,
+            '_token':token
+        });
+        $.ajax({
+            url:'Delete_post',
+            method:"POST",
+            data:{id_post:id,
+                _token:token
+            },
+            success: function(data){ // What to do if we succeed
+                $('#message').html(data);
+                // location.reload();
+            },
+            error: function(data){
+                alert('Error'+data);
+                //console.log(data);
+            }
+        });
+    });
+    $(document).on('click', '.Restore_post', function(){
+        var id = $(this).attr("id");
+        if(!confirm("Are you sure you want to Restore this Post?"))
+        {
+            return false;
+        }
+        var token=$("meta[name='csrf-token']").attr("content");
+        console.log({
+            'id_post':id,
+            '_token':token
+        });
+        $.ajax({
+            url:'Restore_post',
+            method:"POST",
+            data:{id_post:id,
                 _token:token
             },
             success: function(data){ // What to do if we succeed

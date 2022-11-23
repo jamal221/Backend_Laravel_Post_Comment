@@ -54,6 +54,21 @@ class backendcontroller extends Controller
                 ->distinct()
                 ->get()
                 ->count();
+            $fetched_admin_user = DB::table('login_user_admins')
+                ->join('admin_users', 'login_user_admins.user_id', '=', 'admin_users.id')
+                ->select('login_user_admins.*','admin_users.*')
+                ->where('login_user_admins.username','=',$received_username)
+                ->where('login_user_admins.password','=',$received_password)
+                ->distinct()
+                ->get();
+            $fetched_admin_user_count = DB::table('login_user_admins')
+                ->join('admin_users', 'login_user_admins.user_id', '=', 'admin_users.id')
+                ->select('login_user_admins.*','admin_users.*')
+                ->where('login_user_admins.username','=',$received_username)
+                ->where('login_user_admins.password','=',$received_password)
+                ->distinct()
+                ->get()
+               ->count();
 
 //            dd ($fetched_user_json);
 //            $name_user=$fetched_user->name;
@@ -79,7 +94,15 @@ class backendcontroller extends Controller
 
 //                return view('backend_project.logged', compact('fetched_user_json'));
 
-            }else{
+            }elseif($fetched_admin_user_count){
+                Artisan::call('cache:clear');
+                $fetched_user_json=json_decode($fetched_user, true);
+                Cache::store('database')->add('result_login', $fetched_admin_user, now()->addMinutes(50));
+                Cache::store('database')->add('user_valid_web_level_2',$received_username,now()->addMinutes(20));
+                Cache::lock('user_valid_web_level_2', 'result_login');
+                echo 123;
+            }
+            else{
                 echo 321;
             }
 //            dd([$name_user,$surname_user]);
@@ -105,14 +128,23 @@ class backendcontroller extends Controller
 
     public function viewposts()
     {
-        $post_all=DB::table('posts')
+//        $post_all=DB::table('posts')
+//            ->select('*')
+//            ->paginate(30);
+        $post_all=post::withTrashed()
             ->select('*')
             ->paginate(30);
+        $post_trashed_ids=post::onlyTrashed()
+            ->select('*')
+            ->get();
+        $post_trashed_Count=post::onlyTrashed()
+            ->select('id')
+            ->count();
 
-//        $post_all_json=json_decode($post_all);
+        $post_trashed_ids=json_decode($post_trashed_ids);
 //        dd($post_all);
         Cache::store('database')->increment('user_valid_web',5);
-        return view('backend_project.viewposts', compact('post_all'));
+        return view('backend_project.viewposts', compact('post_all', 'post_trashed_ids','post_trashed_Count'));
     }
 
     public function viewcommentsCTL(Request $request)
@@ -301,6 +333,74 @@ class backendcontroller extends Controller
             {
 //                DB::rollBack();
 //                echo '<div class="alert alert-danger">Try catch error occured </div>';
+                Log::error($e);
+//                throw $e;
+            }
+
+        }
+    }
+    function delete_post(Request $request)// Delete post by soft_delete
+    {
+
+        if($request->ajax())
+        {
+//            dd($request->id());
+            Cache::store('database')->increment('user_valid_web_level_2',10);
+            try{
+
+//                DB::beginTransaction();
+                $del_post=post::where('id',$request->id_post)->delete();
+                if($del_post)
+                {
+                    echo '<div class="alert alert-success">Post Deleted</div>';
+//                    DB:: commit();
+                }
+                else
+                {
+                    echo '<div class="alert alert-danger">Error accured </div>';
+//                    DB::rollBack();
+                }
+
+
+            }
+            catch (\Exception $e)
+            {
+//                DB::rollBack();
+                echo '<div class="alert alert-danger">Error accured </div>';
+                Log::error($e);
+//                throw $e;
+            }
+
+        }
+    }
+    function restore_post(Request $request)// Restore Post from
+    {
+
+        if($request->ajax())
+        {
+            Cache::store('database')->increment('user_valid_web_level2',10);
+//            dd($request->id());
+            try{
+
+//                DB::beginTransaction();
+                $res_post=post::where('id',$request->id_post)->restore();
+                if($res_post)
+                {
+                    echo '<div class="alert alert-success">Post successfuly has been restored</div>';
+//                    DB:: commit();
+                }
+                else
+                {
+                    echo '<div class="alert alert-danger">Error accured </div>';
+//                    DB::rollBack();
+                }
+
+
+            }
+            catch (\Exception $e)
+            {
+//                DB::rollBack();
+                echo '<div class="alert alert-danger">Error accured </div>';
                 Log::error($e);
 //                throw $e;
             }

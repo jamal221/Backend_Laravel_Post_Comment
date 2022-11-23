@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('login_users', function (Blueprint $table) {
+        Schema::create('login_user_admins', function (Blueprint $table) {
             $table->id();
             $table->string('user_id')->nullable(false);
             $table->string('username')->nullable(false);
             $table->string('password')->nullable(false);
             $table->timestamps();
-            $table->foreign('user_id')
-                    ->references('id')
-                    ->on('admin_users');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('login_users');
+        Schema::dropIfExists('login_user_admins');
     }
 };

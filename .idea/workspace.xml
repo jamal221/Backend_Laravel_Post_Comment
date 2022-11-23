@@ -2,11 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="995bf09a-89b3-42de-a15f-ff13f069d1ee" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckNewCode_ForTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/admin_user.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/login_user_admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/admin_userFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/login_user_adminFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2022_11_22_153818_create_create_admin_user_tabels_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2022_11_22_160126_create_login_user_admins_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeders/AdminUserSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeders/login_user_admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backendcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backendcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_11_05_121727_create_reg_users_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_11_19_174328_create_add_moderate_field_to__reg_user_table_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_11_19_174328_create_add_moderate_field_to__reg_user_table_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_11_08_142734_create_login_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_11_08_142734_create_login_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/logged.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/logged.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/viewposts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/viewposts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -147,8 +161,11 @@
     </include_path>
   </component>
   <component name="ProjectId" id="2GMyRuEZYowJ0oXtEZkqvTQ4FuO" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/laravel_installed" />
@@ -195,7 +212,7 @@
       <workItem from="1666639637850" duration="2843000" />
       <workItem from="1666645224132" duration="23955000" />
       <workItem from="1667060107435" duration="121564000" />
-      <workItem from="1668437486637" duration="81077000" />
+      <workItem from="1668437486637" duration="93564000" />
     </task>
     <servers />
   </component>
@@ -214,5 +231,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
