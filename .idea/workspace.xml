@@ -2,25 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="995bf09a-89b3-42de-a15f-ff13f069d1ee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckNewCode_ForTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/admin_user.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/login_user_admin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/admin_userFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/login_user_adminFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_11_22_153818_create_create_admin_user_tabels_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_11_22_160126_create_login_user_admins_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/AdminUserSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/login_user_admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Traits/manage_local_cache.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backendcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backendcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_11_08_142734_create_login_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_11_08_142734_create_login_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/logged.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/logged.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend_project/viewcomments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/viewcomments.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/backend_project/viewposts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend_project/viewposts.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,7 +200,7 @@
       <workItem from="1666639637850" duration="2843000" />
       <workItem from="1666645224132" duration="23955000" />
       <workItem from="1667060107435" duration="121564000" />
-      <workItem from="1668437486637" duration="93564000" />
+      <workItem from="1668437486637" duration="103347000" />
     </task>
     <servers />
   </component>

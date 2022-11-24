@@ -1,7 +1,7 @@
 @extends('backend_project.Layouts.main')
 @section('content')
     @php
-        if(!\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_0') and !\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1')  )
+        if(!\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_0') and !\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1')  and !\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2') )
             {
                     echo '<script type="text/javascript">
                     location.replace("/login");
@@ -35,12 +35,18 @@
     <div>
         <h3>Addtional Operation here like new comment, delete comment and edite comment</h3>
 {{--        @if($user_can_del_id==$items->user_id_comment )--}}
+{{--        {{dd((\App\Models\comment::CheckTrashID($items->id)==1))}}--}}
+        @if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2') and (\App\Models\comment::CheckTrashID($items->id)==1))
+            <button type="button"   class="btn btn-danger btn-xs restore_comment" style="background-color: chartreuse" id="{{$items->id}}" >Do you like to Restore {{$items->id}} th Comments</button>
+        @else
+           <button type="button"   class="btn btn-danger btn-xs del_comment" style="background-color: fuchsia" id="{{$items->id}}" >Do you like to delete {{$items->id}} th Comments</button>
+        @endif
 
     @if(($user_can_del_id == $items->user_id_comment) and (\App\Models\comment::CheckTrashID($items->id)==1))
-                <button type="button"   class="btn btn-danger btn-xs restore_comment" id="{{$items->id}}" >Do you like to Restore {{$items->id}} th Comments</button>
-            @endif
-        @if(($user_can_del_id == $items->user_id_comment) and (\App\Models\comment::CheckTrashID($items->id)==2))
-                <button type="button"   class="btn btn-danger btn-xs del_comment" id="{{$items->id}}" >Do you like to delete {{$items->id}} th Comments</button>
+            <button type="button"   class="btn btn-danger btn-xs restore_comment" id="{{$items->id}}" >Do you like to Restore {{$items->id}} th Comments</button>
+        @endif
+    @if(($user_can_del_id == $items->user_id_comment) and (\App\Models\comment::CheckTrashID($items->id)==2))
+            <button type="button"   class="btn btn-danger btn-xs del_comment" id="{{$items->id}}" >Do you like to delete {{$items->id}} th Comments</button>
         @endif
 
     </div>

@@ -30,6 +30,7 @@ Route::post('/delete_comment', [\App\Http\Controllers\backendcontroller::class,'
 Route::post('/restore_comment', [\App\Http\Controllers\backendcontroller::class,'restore_comment'] );
 Route::post('/Add_comment', [\App\Http\Controllers\backendcontroller::class,'Add_comment'] );
 Route::post('/Delete_post', [\App\Http\Controllers\backendcontroller::class,'delete_post'] );
+Route::post('/Add_post', [\App\Http\Controllers\backendcontroller::class,'Add_post'] );
 Route::post('/Restore_post', [\App\Http\Controllers\backendcontroller::class,'restore_post'] );
 Route::get('/check_code', [\App\Http\Controllers\CheckNewCode_ForTest::class,'check_code'] );
 

@@ -68,7 +68,8 @@
         $.ajax({
             url:'Add_post',
             method:"POST",
-            data:{id_user:id,
+            data:{
+                id_user:id,
                 _token:token
             },
             success: function(data){ // What to do if we succeed

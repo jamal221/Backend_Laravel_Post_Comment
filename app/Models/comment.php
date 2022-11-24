@@ -39,6 +39,8 @@ class comment extends Model
         return $this->hasMany(post::class,'id','post_id');
     }
     public Static function CheckTrashID($id_comment){
+        $comment_trashed_count=0;
+        $comment_Not_trashed_count=0;
         $comment_trashed_count=comment::onlyTrashed()
             ->where('id',$id_comment)
             ->get()
@@ -47,6 +49,7 @@ class comment extends Model
             ->where('id',$id_comment)
             ->get()
             ->count();
+//        dd([$id_comment,$comment_trashed_count,$comment_Not_trashed_count ]);
         if($comment_trashed_count)
             return 1;
         if($comment_Not_trashed_count)

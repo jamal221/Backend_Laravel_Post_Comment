@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+//use App\Traits\increase_time_local_cache;
 class backendcontroller extends Controller
 {
+//    use increase_time_local_cache;
     //
     public function index()
     {
@@ -133,7 +134,8 @@ class backendcontroller extends Controller
 //            ->paginate(30);
         $post_all=post::withTrashed()
             ->select('*')
-            ->paginate(30);
+            ->orderByDesc('created_at')
+            ->paginate(100);
         $post_trashed_ids=post::onlyTrashed()
             ->select('*')
             ->get();
@@ -143,7 +145,12 @@ class backendcontroller extends Controller
 
         $post_trashed_ids=json_decode($post_trashed_ids);
 //        dd($post_all);
-        Cache::store('database')->increment('user_valid_web',5);
+//        @if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_0') or \Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1') or \Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2') )
+
+//        $this->add_10_minutes('user_valid_web_level_0');
+//        $this->add_10_minutes('user_valid_web_level_1');
+//        $this->add_10_minutes('user_valid_web_level_2');
+
         return view('backend_project.viewposts', compact('post_all', 'post_trashed_ids','post_trashed_Count'));
     }
 
@@ -159,10 +166,22 @@ class backendcontroller extends Controller
 //                    ->paginate(25);
             $post_id=$request->post_id;
             comment::Comments_More_Than_3_hours_will_trash($post_id);
-            $comments_all=comment::withoutTrashed()
-                        ->where('post_id', '=', $post_id)
-                        ->orderByDesc('created_at')
-                        ->paginate('25');
+            if((Cache::store('database')->has('user_valid_web_level_2')) or (Cache::store('database')->has('user_valid_web_level_1')) ){
+                $comments_all=comment::withTrashed()
+                    ->where('post_id', '=', $post_id)
+                    ->orderByDesc('created_at')
+                    ->paginate('25');
+                Cache::store('database')->increment('user_valid_web_level_2',3);
+                Cache::store('database')->increment('user_valid_web_level_1',3);
+            }
+            else{
+                $comments_all=comment::withoutTrashed()
+                    ->where('post_id', '=', $post_id)
+                    ->orderByDesc('created_at')
+                    ->paginate('25');
+                Cache::store('database')->increment('user_valid_web',3);
+            }
+
             $Trashed_Comments_IDS=comment::onlyTrashed()
                 ->select('id')
                 ->where('post_id', '=', $request->post_id)
@@ -171,7 +190,7 @@ class backendcontroller extends Controller
 
 
                         $user_can_del_id = $request->user_set_id;
-                        Cache::store('database')->increment('user_valid_web',3);
+
 //                dd($comments_all);
                 return view('/backend_project.viewcomments', compact('comments_all', 'user_can_del_id','Trashed_Comments_IDS','post_id'));
     //        $comments_all=comment::where('post_id',$request->post_id)->paginate(25);
@@ -233,7 +252,10 @@ class backendcontroller extends Controller
             try{
 
 //                DB::beginTransaction();
-                $res_comment=comment::where('id',$request->id)->restore();
+//                $res_comment=comment::where('id',$request->id)->update(['deleted_at'=>NULL, 'comment_timestamps'=>time()]);
+                $res_comment=DB::table('comments')
+                    ->where('id','=',$request->id)
+                    ->update(['deleted_at'=>NULL,'comment_timestamps'=>time()]);
                 if($res_comment  )
                 {
                     echo '<div class="alert alert-success">Comment successfuly has been restored</div>';
@@ -250,6 +272,7 @@ class backendcontroller extends Controller
             catch (\Exception $e)
             {
 //                DB::rollBack();
+                echo error($e);
                 echo '<div class="alert alert-danger">Error accured </div>';
                 Log::error($e);
 //                throw $e;
@@ -316,16 +339,16 @@ class backendcontroller extends Controller
             $post2->body=str_repeat(fake()->realText(200),'2');
 
                 $post2->save();
-//            if($post2->save())
-//            {
-//                echo '<div class="alert alert-success">Post successfuly has been saved</div>';
-////                    DB:: commit();
-//            }
-//            else
-//            {
-//                echo '<div class="alert alert-danger">Error accured </div>';
-////                    DB::rollBack();
-//            }
+            if($post2->save())
+            {
+                echo '<div class="alert alert-success">Post successfuly has been saved</div>';
+//                    DB:: commit();
+            }
+            else
+            {
+                echo '<div class="alert alert-danger">Error accured </div>';
+//                    DB::rollBack();
+            }
 
 
             }
@@ -407,5 +430,7 @@ class backendcontroller extends Controller
 
         }
     }
+
+
 
 }
