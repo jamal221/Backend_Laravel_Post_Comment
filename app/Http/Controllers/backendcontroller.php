@@ -165,7 +165,13 @@ class backendcontroller extends Controller
 //                    ->where('deleted_at','=', null)
 //                    ->paginate(25);
             $post_id=$request->post_id;
+            $user_can_del_id = $request->user_set_id;
             comment::Comments_More_Than_3_hours_will_trash($post_id);
+            $Trashed_Comments_IDS=comment::onlyTrashed()
+                ->select('id')
+                ->where('post_id', '=', $request->post_id)
+                ->get()
+                ->toArray();
             if((Cache::store('database')->has('user_valid_web_level_2')) or (Cache::store('database')->has('user_valid_web_level_1')) ){
                 $comments_all=comment::withTrashed()
                     ->where('post_id', '=', $post_id)
@@ -173,6 +179,8 @@ class backendcontroller extends Controller
                     ->paginate('25');
                 Cache::store('database')->increment('user_valid_web_level_2',3);
                 Cache::store('database')->increment('user_valid_web_level_1',3);
+                return view('/backend_project.viewcomments', compact('comments_all', 'user_can_del_id','Trashed_Comments_IDS','post_id'));
+
             }
             else{
                 $comments_all=comment::withoutTrashed()
@@ -180,19 +188,9 @@ class backendcontroller extends Controller
                     ->orderByDesc('created_at')
                     ->paginate('25');
                 Cache::store('database')->increment('user_valid_web',3);
-            }
-
-            $Trashed_Comments_IDS=comment::onlyTrashed()
-                ->select('id')
-                ->where('post_id', '=', $request->post_id)
-                ->get()
-                ->toArray();
-
-
-                        $user_can_del_id = $request->user_set_id;
-
-//                dd($comments_all);
                 return view('/backend_project.viewcomments', compact('comments_all', 'user_can_del_id','Trashed_Comments_IDS','post_id'));
+            }
+//                dd($comments_all);
     //        $comments_all=comment::where('post_id',$request->post_id)->paginate(25);
     //        $pos=post::where('id',$request->post_id);
     //        $comments_all=(new \App\Models\comment)->show_comment;

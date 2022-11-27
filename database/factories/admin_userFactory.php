@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\admin_user;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\admin_users>
  */
 class admin_userFactory extends Factory
 {
@@ -16,6 +17,7 @@ class admin_userFactory extends Factory
      * @return array<string, mixed>
      * @throws \Exception
      */
+    protected $model=admin_user::class;
     public function definition()
     {
         return [

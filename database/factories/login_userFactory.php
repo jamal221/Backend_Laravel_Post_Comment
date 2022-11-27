@@ -26,7 +26,8 @@ class login_userFactory extends Factory
             //
             'user_id'=>$user_id_reg,
             'username'=>$sur_user,
-            'password'=>Number::random(6),
+//            'password'=>Number::random(6),
+            'password'=>fake()->password(6,12),
             'created_at'=>now(),
             'updated_at'=>now()
         ];

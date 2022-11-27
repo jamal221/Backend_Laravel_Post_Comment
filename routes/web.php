@@ -20,15 +20,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/backend', [\App\Http\Controllers\backendcontroller::class,'index']);
-Route::get('/login', [\App\Http\Controllers\backendcontroller::class,'login']);
+Route::get('/backend', [\App\Http\Controllers\backendcontroller::class,'index'])->name('backend');
+Route::get('/login', [\App\Http\Controllers\backendcontroller::class,'login'])->name('login');
 Route::get('/checkuser',[\App\Http\Controllers\backendcontroller::class,'checkuser'])->name('checkuser');
 Route::get('/logged',[\App\Http\Controllers\backendcontroller::class,'logged'])->name('logged');
 Route::get('/viewposts',[\App\Http\Controllers\backendcontroller::class,'viewposts'])->name('viewposts');
 Route::get('/viewcomments',[\App\Http\Controllers\backendcontroller::class,'viewcommentsCTL'])->name('viewcomments');
 Route::post('/delete_comment', [\App\Http\Controllers\backendcontroller::class,'del_comment'] );
 Route::post('/restore_comment', [\App\Http\Controllers\backendcontroller::class,'restore_comment'] );
-Route::post('/Add_comment', [\App\Http\Controllers\backendcontroller::class,'Add_comment'] );
+Route::post('/Add_comment', [\App\Http\Controllers\backendcontroller::class,'Add_comment'] )->name('Add_comment');
 Route::post('/Delete_post', [\App\Http\Controllers\backendcontroller::class,'delete_post'] );
 Route::post('/Add_post', [\App\Http\Controllers\backendcontroller::class,'Add_post'] );
 Route::post('/Restore_post', [\App\Http\Controllers\backendcontroller::class,'restore_post'] );
