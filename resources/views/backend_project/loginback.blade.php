@@ -43,9 +43,9 @@
                 <h4>User Authentecation </h4>
                 </br>
                 @csrf
-                <input type="text" id="userName" class="form-control input-sm " placeholder="username"/>
+                <input type="text" id="userName" name="userName" class="form-control input-sm " placeholder="username"/>
                 </br></br>
-                <input type="password" id="userPassword" class="form-control input-sm " placeholder="Password"/>
+                <input type="password" id="userPassword" name="userPassword" class="form-control input-sm " placeholder="Password"/>
                 </br></br>
                 <div class="wrapper">
                         <span class="group-btn">

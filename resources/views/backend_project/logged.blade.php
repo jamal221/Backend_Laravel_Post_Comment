@@ -11,6 +11,11 @@
 {{--{{ dd(\Illuminate\Support\Facades\Cache::store('database')->get('result_login')) }}--}}
 {{--{{dd($fetched_user_json)}}--}}
 {{--{{$fetched_user_json=\Illuminate\Support\Facades\Cache::store('database')->get('result_login')->toArray()}}--}}
+@if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2'))
+    <div style="background-color: #ffcd39">
+        <h1>You are admin user, that can manage posts, comments</h1>
+    </div>
+    @endif
 
 @if(\Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_1') or \Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_0') or \Illuminate\Support\Facades\Cache::store('database')->has('user_valid_web_level_2') )
     @foreach(\Illuminate\Support\Facades\Cache::store('database')->get('result_login') as $items)
