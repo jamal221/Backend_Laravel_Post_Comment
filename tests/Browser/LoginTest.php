@@ -54,6 +54,9 @@ class LoginTest extends DuskTestCase
                 ->type('userPassword','')
                 ->press('SignIn')
                 ->pause(5000)
+                ->screenshot('LoginScreenAdmin')
+                ->storeConsoleLog('LoginLogAdmin')
+                ->storeSource('LoginAdminPage')
                 ->assertSeeIn('input[name="userName"]',
                     'Both Fields are required')
                 ->assertSeeIn('input[name="userPassword"]',
