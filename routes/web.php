@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AjaxImageUploadController;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,3 +59,14 @@ Route::get('/loglogout',function(){
 //Auth::routes();
 //
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('ajaxImageUpload', [AjaxImageUploadController::class, 'ajaxImageUpload']);
+Route::post('ajaxImageUpload', [AjaxImageUploadController::class, 'ajaxImageUploadPost'])->name('ajaxImageUpload');
+
+Route::controller(ImageUploadController::class)->group(function(){
+
+    Route::get('image-upload', 'index');
+
+    Route::post('image-upload', 'store')->name('image.store');
+
+});
